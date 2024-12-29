@@ -32,6 +32,20 @@ section {
     flex: 1;
 }
 
+.btn-pp {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 0px;
+    background-color: #f00; /* Rode knop */
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 #player-info {
     display: flex;
     justify-content: space-around;
