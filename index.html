@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dart-Counting.com</title>
+    <link rel="stylesheet" href="style-index.css">
+</head>
+<body>
+    <header>
+        <h1>🎯 Dart-Counting.com 🎯</h1>
+    </header>
+
+    <section id="setup-section">
+        <form id="game-setup-form">
+            <div class="form-group">
+                <label for="player1-name">Name Player 1:</label>
+                <input type="text" id="player1-name" name="player1-name" placeholder="Player 1" required>
+            </div>
+            <div class="form-group">
+                <label for="player2-name">Name Player 2:</label>
+                <input type="text" id="player2-name" name="player2-name" placeholder="Player 2" required>
+            </div>
+            <div class="form-group">
+                <label for="start-score">Start Score:</label>
+                <select id="start-score" name="start-score" required>
+                    <option value="301" selected>301</option>
+                    <option value="501">501</option>
+                    <option value="701">701</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="number-of-sets">Number Of Sets:</label>
+                <input type="number" id="number-of-sets" name="number-of-sets" min="0" max="5" value="0" required>
+            </div>
+            <div class="form-1">
+                <label for="number-of-legs">Number Of Legs:</label>
+                <input type="number" id="number-of-legs" name="number-of-legs" min="1" max="5" value="3" required>
+            </div>
+            <button type="submit" id="start-game">Game On!</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Lubbert Schenk</p>
+    </footer>
+
+    <script>
+        document.querySelector('#game-setup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const player1Name = document.querySelector('#player1-name').value;
+            const player2Name = document.querySelector('#player2-name').value;
+            const startScore = document.querySelector('#start-score').value;
+            const numberOfSets = document.querySelector('#number-of-sets').value;
+            const numberOfLegs = document.querySelector('#number-of-legs').value;
+
+            localStorage.setItem('player1Name', player1Name);
+            localStorage.setItem('player2Name', player2Name);
+            localStorage.setItem('startScore', startScore);
+            localStorage.setItem('numberOfSets', numberOfSets);
+            localStorage.setItem('numberOfLegs', numberOfLegs);
+
+            window.location.href = 'score.html';
+        });
+    </script>
+</body>
+</html>

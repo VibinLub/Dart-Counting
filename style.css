@@ -1,0 +1,104 @@
+/* Algemene stijlregels */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #000); /* Gladde achtergrond met zwarttinten */
+    color: #fff;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #111; /* Donkergrijze achtergrond voor de header */
+    color: #f00; /* Accentkleur rood voor de tekst */
+    text-align: center;
+    padding: 1rem 0;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+section {
+    padding: 2rem;
+    text-align: center;
+    flex: 1;
+}
+
+#player-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.player {
+    background-color: #222; /* Iets lichtere zwarte achtergrond voor spelersinfo */
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); /* Rode schaduw */
+    text-align: center;
+    width: 45%;
+}
+
+input[type="number"] {
+    display: block;
+    margin: 0 auto 1rem;
+    text-align: center;
+    width: 60%;
+}
+
+#input-section {
+    margin: 2rem auto;
+    text-align: center;
+}
+
+#input-section label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+#input-section input {
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0.5rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+#input-section button {
+    display: block;
+    margin: 0 auto;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #f00; /* Rode knop */
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#input-section button:hover {
+    background-color: #c00; /* Donkerder rood bij hover */
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #111;
+    color: #f00;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
+    margin-top: auto;
+}
