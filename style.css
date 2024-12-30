@@ -4,7 +4,7 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #1a1a1a, #000); /* Gladde achtergrond met zwarttinten */
+    background: linear-gradient(135deg, #1a1a1a, #000);
     color: #fff;
     line-height: 1.6;
     display: flex;
@@ -13,8 +13,8 @@ body {
 }
 
 header {
-    background-color: #111; /* Donkergrijze achtergrond voor de header */
-    color: #f00; /* Accentkleur rood voor de tekst */
+    background-color: #111;
+    color: #f00;
     text-align: center;
     padding: 1rem 0;
     font-family: 'Orbitron', sans-serif;
@@ -28,7 +28,6 @@ header h1 {
 
 section {
     padding: 2rem;
-    text-align: center;
     flex: 1;
 }
 
@@ -37,8 +36,7 @@ section {
     width: 100%;
     padding: 10px;
     border: none;
-    border-radius: 0px;
-    background-color: #f00; /* Rode knop */
+    background-color: #f00;
     color: #fff;
     font-size: 1rem;
     font-family: 'Orbitron', sans-serif;
@@ -46,38 +44,33 @@ section {
     transition: background-color 0.3s ease;
 }
 
+.text1 {
+    color: #444;
+    margin-top: 10px;
+}
+
 #player-info {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     margin: 2rem 0;
 }
 
 .player {
-    background-color: #222; /* Iets lichtere zwarte achtergrond voor spelersinfo */
+    background-color: #222;
     padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); /* Rode schaduw */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
     text-align: center;
     width: 45%;
 }
 
-input[type="number"] {
-    display: block;
-    margin: 0 auto 1rem;
-    text-align: center;
-    width: 60%;
-}
-
 #input-section {
     margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-}
-
-#input-section label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
 }
 
 #input-section input {
@@ -87,15 +80,23 @@ input[type="number"] {
     color: #fff;
     padding: 0.5rem;
     font-family: 'Roboto', sans-serif;
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 60%;
 }
 
-#input-section button {
-    display: block;
-    margin: 0 auto;
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.button-group button {
     padding: 0.7rem;
     border: none;
     border-radius: 5px;
-    background-color: #f00; /* Rode knop */
+    background-color: #f00;
     color: #fff;
     font-size: 1rem;
     font-family: 'Orbitron', sans-serif;
@@ -103,9 +104,30 @@ input[type="number"] {
     transition: background-color 0.3s ease;
 }
 
-#input-section button:hover {
-    background-color: #c00; /* Donkerder rood bij hover */
+.button-group button:hover {
+    background-color: #c00;
 }
+
+#statistics-section {
+    display: flex;
+    justify-content: center; /* Centreer de gehele sectie */
+    align-items: center; /* Verticaal centreren */
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: nowrap; /* Zorg dat de stats op één lijn blijven */
+    width: 100%;
+}
+
+#player1-stats, #player2-stats {
+    flex: 1;
+    max-width: 100%; /* Houd ze beperkt tot 45% breedte per stuk */
+    background-color: #222;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    text-align: center;
+}
+
 
 footer {
     text-align: center;
@@ -115,4 +137,20 @@ footer {
     font-family: 'Orbitron', sans-serif;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
     margin-top: auto;
+}
+
+
+
+#submit-score {
+    background-color: #f00;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#submit-score:hover {
+    background-color: #c00;
 }

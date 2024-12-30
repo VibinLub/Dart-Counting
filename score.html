@@ -7,7 +7,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <script src="https://kit.fontawesome.com/033f10984a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-</head>
 <body>
     <header>
         <h1><a href="index.html" style="color: inherit; text-decoration: none;">🎯 Dart-Counting.com 🎯</a></h1>
@@ -17,21 +16,32 @@
     <section id="game-section">
         <div id="player-info">
             <div id="player1" class="player">
-                <h2>🧑‍🎯 <span id="player1-name">Player 1</span></h2>
+                <h2>🎯 <span id="player1-name">Player 1</span></h2>
                 <h1>Score: <span id="score1">501</span></h1>
+                <br>
+                <h3>📊 Stats:</h3>
                 <p>Sets: <span id="sets1">0</span> | Legs: <span id="legs1">0</span></p>
+                <p>Average Score: <span id="avg1">0</span></p>
+                <p>Total Throws: <span id="throws1">0</span></p>
             </div>
             <div id="player2" class="player">
-                <h2>🧑‍🎯 <span id="player2-name">Player 2</span></h2>
+                <h2>🎯 <span id="player2-name">Player 2</span></h2>
                 <h1>Score: <span id="score2">501</span></h1>
+                <br>
+                <h3>📊 Stats:</h3>
                 <p>Sets: <span id="sets2">0</span> | Legs: <span id="legs2">0</span></p>
+                <p>Average Score: <span id="avg2">0</span></p>
+                <p>Total Throws: <span id="throws2">0</span></p>
             </div>
         </div>
 
         <div id="input-section">
             <h3>🎯 Enter a score</h3>
-            <input type="number" id="score-input" placeholder="Score (0-180)" min="0" max="180">
-            <button id="submit-score">✅ Publish Score</button>
+            <input type="number" id="score-input" placeholder="Score (e.g., 50 or -50)" min="-180" max="180">
+            <button id="submit-score">✅ Submit Score</button>
+            <div class="text1"
+            <h6>Please make sure that using - before a number makes it so you add that to your score! So this means that it will go up and not down, it is used for going a number back!</h6>
+</div>
         </div>
     </section>
 
@@ -41,33 +51,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const player1NameEl = document.querySelector('#player1-name');
-            const player2NameEl = document.querySelector('#player2-name');
             const player1ScoreEl = document.querySelector('#score1');
             const player2ScoreEl = document.querySelector('#score2');
-            const sets1El = document.querySelector('#sets1');
-            const sets2El = document.querySelector('#sets2');
-            const legs1El = document.querySelector('#legs1');
-            const legs2El = document.querySelector('#legs2');
+            const avg1El = document.querySelector('#avg1');
+            const avg2El = document.querySelector('#avg2');
+            const throws1El = document.querySelector('#throws1');
+            const throws2El = document.querySelector('#throws2');
             const scoreInput = document.querySelector('#score-input');
             const submitScoreButton = document.querySelector('#submit-score');
 
-            // Haal gegevens van index.html via localStorage
-            const player1Name = localStorage.getItem('player1Name') || 'Speler 1';
-            const player2Name = localStorage.getItem('player2Name') || 'Speler 2';
-            const startScore = parseInt(localStorage.getItem('startScore') || '501', 10);
-
-            // Zet namen en startscores
-            player1NameEl.textContent = player1Name;
-            player2NameEl.textContent = player2Name;
-            player1ScoreEl.textContent = startScore;
-            player2ScoreEl.textContent = startScore;
-
-            // Variabelen
-            let player1Score = startScore;
-            let player2Score = startScore;
-            let player1Legs = 0, player2Legs = 0;
-            let player1Sets = 0, player2Sets = 0;
+            let player1Score = 501, player2Score = 501;
+            let player1Throws = 0, player2Throws = 0;
+            let player1TotalScore = 0, player2TotalScore = 0;
             let currentPlayer = 1;
 
             const updateActivePlayer = () => {
@@ -77,86 +72,38 @@
 
             const updateScores = (score) => {
                 if (currentPlayer === 1) {
-                    if (player1Score - score < 0) {
-                        alert('Speler 1 heeft te veel gescoord!');
-                        return;
-                    }
                     player1Score -= score;
+                    player1TotalScore += Math.abs(score);
+                    player1Throws++;
                     player1ScoreEl.textContent = player1Score;
-                    if (player1Score <= 0) handleLegWin(1);
+                    throws1El.textContent = player1Throws;
+                    avg1El.textContent = (player1TotalScore / player1Throws).toFixed(2);
                 } else {
-                    if (player2Score - score < 0) {
-                        alert('Speler 2 heeft te veel gescoord!');
-                        return;
-                    }
                     player2Score -= score;
+                    player2TotalScore += Math.abs(score);
+                    player2Throws++;
                     player2ScoreEl.textContent = player2Score;
-                    if (player2Score <= 0) handleLegWin(2);
+                    throws2El.textContent = player2Throws;
+                    avg2El.textContent = (player2TotalScore / player2Throws).toFixed(2);
                 }
                 currentPlayer = currentPlayer === 1 ? 2 : 1;
                 updateActivePlayer();
             };
 
-            const handleLegWin = (winner) => {
-                if (winner === 1) player1Legs++; else player2Legs++;
-                legs1El.textContent = player1Legs;
-                legs2El.textContent = player2Legs;
-
-                if (player1Legs >= 3 || player2Legs >= 3) handleSetWin(winner);
-                resetLeg();
-            };
-
-            const handleSetWin = (winner) => {
-                if (winner === 1) player1Sets++; else player2Sets++;
-                sets1El.textContent = player1Sets;
-                sets2El.textContent = player2Sets;
-
-                if (player1Sets === 3) announceWinner(1);
-                if (player2Sets === 3) announceWinner(2);
-            };
-
-            const resetLeg = () => {
-                player1Score = startScore;
-                player2Score = startScore;
-                player1ScoreEl.textContent = player1Score;
-                player2ScoreEl.textContent = player2Score;
-            };
-
-            const announceWinner = (winner) => {
-                alert(`${winner === 1 ? player1Name : player2Name} heeft gewonnen! 🎉`);
-                resetGame();
-            };
-
-            const resetGame = () => {
-                player1Score = startScore;
-                player2Score = startScore;
-                player1Legs = 0; player2Legs = 0;
-                player1Sets = 0; player2Sets = 0;
-                player1ScoreEl.textContent = player1Score;
-                player2ScoreEl.textContent = player2Score;
-                legs1El.textContent = player1Legs;
-                legs2El.textContent = player2Legs;
-                sets1El.textContent = player1Sets;
-                sets2El.textContent = player2Sets;
-                currentPlayer = 1;
-                updateActivePlayer();
-            };
-
-            scoreInput.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
-                    submitScoreButton.click();
-                    scoreInput.focus(); // Zorg ervoor dat het invoerveld actief blijft
-                }
-            });
-
             submitScoreButton.addEventListener('click', () => {
-                const score = parseInt(scoreInput.value, 10);
-                if (isNaN(score) || score < 0 || score > 180) {
-                    alert('Voer een geldige score in (0-180).');
+                const score = scoreInput.value === '' ? 0 : parseInt(scoreInput.value, 10);
+                if (isNaN(score) || score < -180 || score > 180) {
+                    alert('Enter a valid score between -180 and 180.');
                     return;
                 }
                 updateScores(score);
                 scoreInput.value = '';
+            });
+
+            scoreInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    submitScoreButton.click();
+                }
             });
 
             updateActivePlayer();
